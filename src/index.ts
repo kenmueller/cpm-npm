@@ -58,7 +58,7 @@ yargs
 				desc: 'Your password'
 			})
 		},
-		argv => auth(argv.email, argv.password)
+		argv => auth(argv.email as string, argv.password as string)
 	)
 	.help()
 	.argv
