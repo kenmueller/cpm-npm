@@ -1,12 +1,13 @@
 import { readFile, writeFile } from 'fs/promises'
 
-import { getOptionsPath, hashString } from '.'
+import { getOptionsPath } from '.'
 
 export const getAuth = async () => {
 	try {
 		const options = await readFile(getOptionsPath())
 		
 		return JSON.parse(options.toString()).auth as {
+			uid: string
 			email: string
 			password: string
 		}
@@ -15,10 +16,7 @@ export const getAuth = async () => {
 	}
 }
 
-export const setAuth = (email: string, password: string) =>
+export const setAuth = (uid: string, email: string, password: string) =>
 	writeFile(getOptionsPath(), JSON.stringify({
-		auth: {
-			email,
-			password: hashString(password)
-		}
+		auth: { uid, email, password }
 	}))
