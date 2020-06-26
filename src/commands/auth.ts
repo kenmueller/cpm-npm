@@ -6,7 +6,9 @@ import { setAuth } from '../utils/auth'
 export default async (email: string, password: string) => {
 	try {
 		if (!(email && password))
-			return console.log(chalk.red.bold('Your email or password cannot be empty'))
+			return console.log(chalk.red.bold(
+				'Your email or password cannot be empty'
+			))
 		
 		const { data } = await axios.post('/auth', { email, password })
 		
