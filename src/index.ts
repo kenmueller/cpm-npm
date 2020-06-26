@@ -2,13 +2,14 @@
 
 import * as yargs from 'yargs'
 
+import run from './commands/run'
 import install from './commands/install'
 import uninstall from './commands/uninstall'
 import update from './commands/update'
 import publish from './commands/publish'
 import auth from './commands/auth'
 
-yargs
+const { argv } = yargs
 	.scriptName('cpm')
 	.usage('$0 <cmd> [args]')
 	.command(
@@ -61,4 +62,6 @@ yargs
 		argv => auth(argv.email as string, argv.password as string)
 	)
 	.help()
-	.argv
+
+if (!argv._.length)
+	run()
